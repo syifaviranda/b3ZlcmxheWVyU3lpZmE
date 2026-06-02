@@ -67,20 +67,16 @@ jobs:
 
       - name: Run Script
         run: |
-          node overlayer.js 2>&1 | tee LOG.txt || true
-
-      - name: Normalize Log.txt
-        run: |
-          sed -i 's/$//' LOG.txt
+          node overlayer.js 2>&1 | tee LOG.js || true
 
       - name: Setup Git Configuration
         run: |
           git config user.email "$GIT_EMAIL"
           git config user.name "$GIT_NAME"
 
-      - name: Commit LOG.txt
+      - name: Commit LOG.js
         run: |
-          git add LOG.txt
+          git add LOG.js
           git commit -m "Update log $(date '+%Y-%m-%d %H:%M:%S')" || echo "No changes to commit."
 
       - name: GitHub Push
